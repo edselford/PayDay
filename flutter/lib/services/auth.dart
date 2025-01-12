@@ -11,6 +11,12 @@ class Auth {
     TOKEN = await storage.read(key: 'token');
   }
 
+  static void logout(BuildContext context) async {
+    TOKEN = null;
+    await storage.delete(key: 'token');
+    if (context.mounted) Navigator.popAndPushNamed(context, '/auth');
+  }
+
   static void login(BuildContext context, String email, String password) async {
     var res = await http.post(
       Uri.parse("$BASE_URL/login"),
@@ -21,7 +27,7 @@ class Auth {
     if (res.statusCode >= 200 && res.statusCode < 300) {
       TOKEN = jsonDecode(res.body);
       storage.write(key: 'token', value: TOKEN);
-      if (context.mounted) Navigator.pushNamed(context, '/home');
+      if (context.mounted) Navigator.popAndPushNamed(context, '/home');
     } else {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

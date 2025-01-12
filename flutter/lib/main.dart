@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:payday/helper.dart';
+import 'package:payday/services/auth.dart';
 import 'pages/login.dart';
 import 'pages/home.dart';
 
-void main() {
+void main() async {
+  await Auth.runtimeToken();
   runApp(const MyApp());
 }
 
@@ -13,7 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'PayDay',
-      initialRoute: '/auth',
+      debugShowCheckedModeBanner: false,
+      initialRoute: TOKEN == null ? '/auth' : '/home',
       routes: {
         '/auth': (context) => const LoginPage(),
         '/home': (context) => const HomePage(),
