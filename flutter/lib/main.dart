@@ -13,9 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'PayDay',
-      initialRoute: '/',
+      initialRoute: '/auth',
       routes: {
-        '/': (context) => const LoginPage(),
+        '/auth': (context) => const LoginPage(),
         '/home': (context) => const HomePage(),
       },
     );

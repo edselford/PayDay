@@ -1,7 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:payday/services/auth.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  LoginPageState createState() => LoginPageState();
+}
+
+class LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void onLogin() {
+    Auth.login(context, _emailController.text, _passwordController.text);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +45,17 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             TextField(
+              controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
-                labelText: 'Username',
+                labelText: 'Email',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.person),
               ),
             ),
             const SizedBox(height: 16),
             TextField(
+              controller: _passwordController,
               obscureText: true,
               decoration: const InputDecoration(
                 labelText: 'Password',
@@ -43,7 +66,8 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/home');
+                // Navigator.pushNamed(context, '/home');
+                onLogin();
               },
               child: const Text('Login'),
             ),

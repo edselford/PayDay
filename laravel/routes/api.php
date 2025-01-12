@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 // Autentikasi
 Route::post('/register', [AuthController::class, "register"]);
 Route::post('/login', [AuthController::class, "login"]);
+Route::get('/me', [AuthController::class, "me"])->middleware('auth:sanctum');
 
 // Karyawan
 Route::prefix('employee')

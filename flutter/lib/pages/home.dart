@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:payday/services/auth.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  Future<bool> validateUser() async {
-    await Future.delayed(const Duration(seconds: 1));
-    bool isValid = true;
-    return isValid;
+  Future<User?> validateUser(BuildContext context) async {
+    try {
+      return await Auth.me();
+    } catch(e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Failed to validate user.'),
+          ),
+        );
+      }
+      return null;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: validateUser(),
+      future: validateUser(context),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
@@ -20,14 +30,14 @@ class HomePage extends StatelessWidget {
               child: CircularProgressIndicator(),
             ),
           );
-        } else if (snapshot.hasData && snapshot.data == true) {
+        } else if (snapshot.hasData && snapshot.data != null) {
           return Scaffold(
             appBar: AppBar(
               title: const Text('Home'),
             ),
-            body: const Center(
+            body: Center(
               child: Text(
-                'Welcome back, User',
+                'Welcome back, ${snapshot.data?.name}',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -37,7 +47,7 @@ class HomePage extends StatelessWidget {
           );
         } else {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            Navigator.pushReplacementNamed(context, '/');
+            Navigator.pushReplacementNamed(context, '/auth');
           });
           return const Scaffold(
             body: Center(
