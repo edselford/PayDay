@@ -5,6 +5,7 @@ import 'pages/login.dart';
 import 'pages/home.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Auth.runtimeToken();
   runApp(const MyApp());
 }

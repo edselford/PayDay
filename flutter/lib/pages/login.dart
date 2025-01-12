@@ -65,10 +65,7 @@ class LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                // Navigator.pushNamed(context, '/home');
-                onLogin();
-              },
+              onPressed: () => onLogin(),
               child: const Text('Login'),
             ),
           ],
