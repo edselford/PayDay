@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,10 +20,14 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'image',
         'name',
+        'age',
+        'gender',
+        'born_date',
+        'role_id',
         'email',
-        'password',
-        'role'
+        'password'
     ];
 
     /**
@@ -45,11 +51,31 @@ class User extends Authenticatable
     ];
 
 
-    function salaries() {
+    /**
+     * image
+     *
+     * @return Attribute
+     */
+    protected function image(): Attribute
+    {
+        return Attribute::make(
+            get: fn($image) => url('/storage/users/' . $image),
+        );
+    }
+
+
+    public function roles()
+    {
+        return $this->belongsTo(Roles::class);
+    }
+
+    function salaries()
+    {
         return $this->hasMany(Salary::class, 'user_id');
     }
 
-    function absences() {
+    function absences()
+    {
         return $this->hasMany(Absence::class, 'user_id');
     }
 }
