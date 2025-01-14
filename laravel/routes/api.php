@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,9 +29,13 @@ Route::get('/me', [AuthController::class, "me"])->middleware('auth:sanctum');
 Route::prefix('employee')
     ->controller(EmployeeController::class)
     ->middleware(['auth:sanctum', 'role:manager'])
-    ->group(function() {
-        Route::get('list', 'list');
-        Route::put('change_role/{id}', 'change_role');
-        Route::get('absence_today', 'absence_today');
-    }
-);
+    ->group(
+        function () {
+            Route::get('list', 'list');
+            Route::put('change_role/{id}', 'change_role');
+            Route::get('absence_today', 'absence_today');
+        }
+    );
+
+// Users
+Route::apiResource('/users', UserController::class);
