@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -18,12 +19,14 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+
+        $user = User::where('email', $request->email)->first();
     
-        if (Auth::attempt($validator->validated())) {
-            $user = Auth::user();
+        if ($user != null && Hash::check($request->password, $user->password)) {
             $token = $user->createToken('authToken')->plainTextToken;
             return response()->json($token);
         }
+
         return response("Username or password incorrect", 401);
     }
 
@@ -48,6 +51,7 @@ class AuthController extends Controller
     }
 
     function me(Request $request) {
-        return response()->json(Auth::user());
+        $user = User::with('roles')->where('id', Auth::user()->id)->first();
+        return response()->json($user);
     }
 }

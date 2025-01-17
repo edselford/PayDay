@@ -15,18 +15,18 @@ class AbsenceSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::where('email', 'izzadin@gmail.com')->first();
-        Absence::create([
-            'user_id' => $user->id,
-            'date' => Carbon::now(),
-            'is_absence' => true
-        ]);
+        // $user = User::where('email', 'izzadin@gmail.com')->first();
+        // Absence::create([
+        //     'user_id' => $user->id,
+        //     'date' => Carbon::now(),
+        //     'is_absence' => true
+        // ]);
 
-        $user = User::where('email', 'ryvexc@gmail.com')->first();
-        Absence::create([
-            'user_id' => $user->id,
-            'date' => Carbon::now(),
-            'is_absence' => true
-        ]);
+        // $user = User::where('email', 'ryvexc@gmail.com')->first();
+        // Absence::create([
+        //     'user_id' => $user->id,
+        //     'date' => Carbon::now(),
+        //     'is_absence' => true
+        // ]);
     }
 }
