@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId("employee_id")->constrained("employees")->onDelete("cascade");
             $table->date("date");
             $table->time("in");
-            $table->time("left");
+            $table->time("left")->nullable();
             $table->timestamps();
         });
     }

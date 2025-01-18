@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Resources\UserResource;
@@ -25,17 +26,24 @@ Route::post('/register', [AuthController::class, "register"]);
 Route::post('/login', [AuthController::class, "login"]);
 Route::get('/me', [AuthController::class, "me"])->middleware('auth:sanctum');
 
+Route::prefix('attendance')
+    ->controller(AttendanceController::class)
+    ->middleware(['auth:sanctum', 'role:User'])
+    ->group(function () {
+        Route::post('check', 'check');
+    });
+
 // Karyawan
-Route::prefix('employee')
-    ->controller(EmployeeController::class)
-    ->middleware(['auth:sanctum', 'role:manager'])
-    ->group(
-        function () {
-            Route::get('list', 'list');
-            Route::put('change_role/{id}', 'change_role');
-            Route::get('absence_today', 'absence_today');
-        }
-    );
+// Route::prefix('employee')
+//     ->controller(EmployeeController::class)
+//     ->middleware(['auth:sanctum', 'role:manager'])
+//     ->group(
+//         function () {
+//             Route::get('list', 'list');
+//             Route::put('change_role/{id}', 'change_role');
+//             Route::get('absence_today', 'absence_today');
+//         }
+//     );
 
 // Users
 Route::apiResource('/users', UserController::class);

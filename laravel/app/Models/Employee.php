@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'salary',
+        'join_date'
+    ];
+
+    function attendances() {
+        return $this->hasMany(Attendance::class, 'employee_id');
+    }
+
+    function todayAttendance() {
+        return $this->attendances()->whereDate('date', now()->toDateString())->first();
+    }
 }
