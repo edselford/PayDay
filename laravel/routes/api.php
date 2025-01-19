@@ -31,6 +31,7 @@ Route::prefix('attendance')
     ->middleware(['auth:sanctum', 'role:User'])
     ->group(function () {
         Route::post('check', 'check');
+        Route::get('status', 'today_status');
     });
 
 // Karyawan

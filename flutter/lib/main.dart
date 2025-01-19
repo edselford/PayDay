@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:payday/helper.dart';
+import 'package:payday/pages/attendance/attendance.dart';
 import 'package:payday/pages/employee/employee.dart';
 import 'package:payday/services/auth.dart';
 import 'pages/login.dart';
@@ -25,7 +26,10 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomePage(),
         
         // Employee
-        '/employee': (context) => const EmployeePage()
+        '/employee': (context) => const EmployeePage(),
+
+        // Attendance
+        '/attendance': (context) => AttendancePage()
       },
     );
   }

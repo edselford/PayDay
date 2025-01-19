@@ -105,162 +105,28 @@ class EmployeePageState extends State<EmployeePage> {
                     ),
                   ),
                 ),
-                body: Padding(
-                    padding: EdgeInsets.only(right: 20, left: 20, top: 30),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        // Fullname
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Fullname',
-                                style: TextStyle(
-                                  color: Color(0xff262626),
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(6)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color.fromRGBO(0, 0, 0, 0.25),
-                                        offset: Offset(2, 2),
-                                        blurRadius: 4)
-                                  ],
-                                  border: Border.all(
-                                    color: Color(0xffD9D9D9),
-                                    width: 1,
+                body: SingleChildScrollView(
+                  child: Padding(
+                      padding: EdgeInsets.only(right: 20, left: 20, top: 30),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          // Fullname
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Fullname',
+                                  style: TextStyle(
+                                    color: Color(0xff262626),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                child: Padding(
-                                    padding: EdgeInsets.all(5),
-                                    child: CupertinoTextField(
-                                      controller: _fullnameController,
-                                      keyboardType: TextInputType.text,
-                                      prefix:
-                                          Padding(padding: EdgeInsets.all(.8)),
-                                      decoration: BoxDecoration(),
-                                      style:
-                                          TextStyle(color: Color(0xff262626)),
-                                    )),
-                              )
-                            ],
-                          ),
-                        ),
-                        // Email
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Email',
-                                style: TextStyle(
-                                  color: Color(0xff262626),
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(6)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color.fromRGBO(0, 0, 0, 0.25),
-                                        offset: Offset(2, 2),
-                                        blurRadius: 4)
-                                  ],
-                                  border: Border.all(
-                                    color: Color(0xffD9D9D9),
-                                    width: 1,
-                                  ),
-                                ),
-                                child: Padding(
-                                    padding: EdgeInsets.all(5),
-                                    child: CupertinoTextField(
-                                      controller: _emailController,
-                                      keyboardType: TextInputType.emailAddress,
-                                      prefix:
-                                          Padding(padding: EdgeInsets.all(.8)),
-                                      decoration: BoxDecoration(),
-                                      style:
-                                          TextStyle(color: Color(0xff262626)),
-                                    )),
-                              )
-                            ],
-                          ),
-                        ),
-                        // Password
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Password',
-                                style: TextStyle(
-                                  color: Color(0xff262626),
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(6)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color.fromRGBO(0, 0, 0, 0.25),
-                                        offset: Offset(2, 2),
-                                        blurRadius: 4)
-                                  ],
-                                  border: Border.all(
-                                    color: Color(0xffD9D9D9),
-                                    width: 1,
-                                  ),
-                                ),
-                                child: Padding(
-                                    padding: EdgeInsets.all(5),
-                                    child: CupertinoTextField(
-                                      controller: _passwordController,
-                                      keyboardType: TextInputType.text,
-                                      prefix:
-                                          Padding(padding: EdgeInsets.all(.8)),
-                                      decoration: BoxDecoration(),
-                                      style:
-                                          TextStyle(color: Color(0xff262626)),
-                                    )),
-                              )
-                            ],
-                          ),
-                        ),
-                        // Gender
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Gender',
-                                style: TextStyle(
-                                  color: Color(0xff262626),
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              Container(
+                                Container(
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius:
@@ -277,162 +143,35 @@ class EmployeePageState extends State<EmployeePage> {
                                     ),
                                   ),
                                   child: Padding(
-                                    padding:
-                                        EdgeInsets.only(right: 13, left: 13),
-                                    child: DropdownButton(
-                                      hint: Text(
-                                        'Select',
-                                        style: TextStyle(
-                                          fontSize: 17
-                                        ),
-                                      ),
-                                      isExpanded: true,
-                                      iconSize: 30.0,
-                                      underline: SizedBox.shrink(),
-                                      style:
-                                          TextStyle(color: Color(0xff262626)),
-                                      value: _genderController,
-                                      items: ['Lelaki', 'Perempuan'].map((val) {
-                                        return DropdownMenuItem<String>(
-                                          value: val,
-                                          child: Text(
-                                            val,
-                                            style: TextStyle(
-                                              color: Color(0xff262626),
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        );
-                                      }).toList(),
-                                      onChanged: (val) {
-                                        setState(() {
-                                          _genderController = val;
-                                        });
-                                      },
-                                    ),
-                                  ))
-                            ],
+                                      padding: EdgeInsets.all(5),
+                                      child: CupertinoTextField(
+                                        controller: _fullnameController,
+                                        keyboardType: TextInputType.text,
+                                        prefix:
+                                            Padding(padding: EdgeInsets.all(.8)),
+                                        decoration: BoxDecoration(),
+                                        style:
+                                            TextStyle(color: Color(0xff262626)),
+                                      )),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                        // Joining Date
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Joining Date',
-                                style: TextStyle(
-                                  color: Color(0xff262626),
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(6)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color.fromRGBO(0, 0, 0, 0.25),
-                                        offset: Offset(2, 2),
-                                        blurRadius: 4)
-                                  ],
-                                  border: Border.all(
-                                    color: Color(0xffD9D9D9),
-                                    width: 1,
+                          // Email
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Email',
+                                  style: TextStyle(
+                                    color: Color(0xff262626),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                child: Padding(
-                                    padding: EdgeInsets.all(5),
-                                    child: TextField(
-                                      controller: _joindateController,
-                                      decoration: InputDecoration(
-                                        labelText: "yyyy-mm-dd",
-                                        floatingLabelBehavior: FloatingLabelBehavior.never,
-                                        prefixIcon: Icon(
-                                          Icons.calendar_today,
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide.none
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide.none
-                                        )
-                                      ),
-                                      style:
-                                          TextStyle(color: Color(0xff262626)),
-                                      readOnly: true,
-                                      onTap: () {
-                                        _selectDate();
-                                      },
-                                    )),
-                              )
-                            ],
-                          ),
-                        ),
-                        // Salary
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Salary',
-                                style: TextStyle(
-                                  color: Color(0xff262626),
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(6)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color.fromRGBO(0, 0, 0, 0.25),
-                                        offset: Offset(2, 2),
-                                        blurRadius: 4)
-                                  ],
-                                  border: Border.all(
-                                    color: Color(0xffD9D9D9),
-                                    width: 1,
-                                  ),
-                                ),
-                                child: Padding(
-                                    padding: EdgeInsets.all(5),
-                                    child: CupertinoTextField(
-                                      controller: _salaryController,
-                                      keyboardType: TextInputType.text,
-                                      prefix:
-                                          Padding(padding: EdgeInsets.all(.8)),
-                                      decoration: BoxDecoration(),
-                                      style:
-                                          TextStyle(color: Color(0xff262626)),
-                                    )),
-                              )
-                            ],
-                          ),
-                        ),
-                        // Salary Method
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Salary Method',
-                                style: TextStyle(
-                                  color: Color(0xff262626),
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              Container(
+                                Container(
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius:
@@ -449,98 +188,362 @@ class EmployeePageState extends State<EmployeePage> {
                                     ),
                                   ),
                                   child: Padding(
-                                    padding:
-                                        EdgeInsets.only(right: 13, left: 13),
-                                    child: DropdownButton(
-                                      hint: Text(
-                                        'Select',
-                                        style: TextStyle(
-                                          fontSize: 17
-                                        ),
-                                      ),
-                                      isExpanded: true,
-                                      iconSize: 30.0,
-                                      underline: SizedBox.shrink(),
-                                      style:
-                                          TextStyle(color: Color(0xff262626)),
-                                      value: _salarymethodController,
-                                      items: ['Per Jam', 'Per Hari', 'Per Bulan'].map((val) {
-                                        return DropdownMenuItem<String>(
-                                          value: val,
-                                          child: Text(
-                                            val,
-                                            style: TextStyle(
-                                              color: Color(0xff262626),
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        );
-                                      }).toList(),
-                                      onChanged: (val) {
-                                        setState(() {
-                                          _salarymethodController = val;
-                                        });
-                                      },
-                                    ),
-                                  ))
-                            ],
+                                      padding: EdgeInsets.all(5),
+                                      child: CupertinoTextField(
+                                        controller: _emailController,
+                                        keyboardType: TextInputType.emailAddress,
+                                        prefix:
+                                            Padding(padding: EdgeInsets.all(.8)),
+                                        decoration: BoxDecoration(),
+                                        style:
+                                            TextStyle(color: Color(0xff262626)),
+                                      )),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                        // Submit
-                        Padding(
-                          padding: EdgeInsets.only(top: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  padding: const EdgeInsets.all(0),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(6),
+                          // Password
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Password',
+                                  style: TextStyle(
+                                    color: Color(0xff262626),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500,
                                   ),
-                                  elevation: 4,
                                 ),
-                                onPressed: () {
-                                  print(Employee.list());
-                                },
-                                child: Ink(
-                                  decoration: const BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                      colors: [
-                                        Color(0xff3DC2EC),
-                                        Color(0xff4B70F5),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(6)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Color.fromRGBO(0, 0, 0, 0.25),
+                                          offset: Offset(2, 2),
+                                          blurRadius: 4)
+                                    ],
+                                    border: Border.all(
+                                      color: Color(0xffD9D9D9),
+                                      width: 1,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                      padding: EdgeInsets.all(5),
+                                      child: CupertinoTextField(
+                                        controller: _passwordController,
+                                        keyboardType: TextInputType.text,
+                                        prefix:
+                                            Padding(padding: EdgeInsets.all(.8)),
+                                        decoration: BoxDecoration(),
+                                        style:
+                                            TextStyle(color: Color(0xff262626)),
+                                      )),
+                                )
+                              ],
+                            ),
+                          ),
+                          // Gender
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Gender',
+                                  style: TextStyle(
+                                    color: Color(0xff262626),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(6)),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Color.fromRGBO(0, 0, 0, 0.25),
+                                            offset: Offset(2, 2),
+                                            blurRadius: 4)
+                                      ],
+                                      border: Border.all(
+                                        color: Color(0xffD9D9D9),
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.only(right: 13, left: 13),
+                                      child: DropdownButton(
+                                        hint: Text(
+                                          'Select',
+                                          style: TextStyle(
+                                            fontSize: 17
+                                          ),
+                                        ),
+                                        isExpanded: true,
+                                        iconSize: 30.0,
+                                        underline: SizedBox.shrink(),
+                                        style:
+                                            TextStyle(color: Color(0xff262626)),
+                                        value: _genderController,
+                                        items: ['Lelaki', 'Perempuan'].map((val) {
+                                          return DropdownMenuItem<String>(
+                                            value: val,
+                                            child: Text(
+                                              val,
+                                              style: TextStyle(
+                                                color: Color(0xff262626),
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          );
+                                        }).toList(),
+                                        onChanged: (val) {
+                                          setState(() {
+                                            _genderController = val;
+                                          });
+                                        },
+                                      ),
+                                    ))
+                              ],
+                            ),
+                          ),
+                          // Joining Date
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Joining Date',
+                                  style: TextStyle(
+                                    color: Color(0xff262626),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(6)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Color.fromRGBO(0, 0, 0, 0.25),
+                                          offset: Offset(2, 2),
+                                          blurRadius: 4)
+                                    ],
+                                    border: Border.all(
+                                      color: Color(0xffD9D9D9),
+                                      width: 1,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                      padding: EdgeInsets.all(5),
+                                      child: TextField(
+                                        controller: _joindateController,
+                                        decoration: InputDecoration(
+                                          labelText: "yyyy-mm-dd",
+                                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                                          prefixIcon: Icon(
+                                            Icons.calendar_today,
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide.none
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide.none
+                                          )
+                                        ),
+                                        style:
+                                            TextStyle(color: Color(0xff262626)),
+                                        readOnly: true,
+                                        onTap: () {
+                                          _selectDate();
+                                        },
+                                      )),
+                                )
+                              ],
+                            ),
+                          ),
+                          // Salary
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Salary',
+                                  style: TextStyle(
+                                    color: Color(0xff262626),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(6)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Color.fromRGBO(0, 0, 0, 0.25),
+                                          offset: Offset(2, 2),
+                                          blurRadius: 4)
+                                    ],
+                                    border: Border.all(
+                                      color: Color(0xffD9D9D9),
+                                      width: 1,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                      padding: EdgeInsets.all(5),
+                                      child: CupertinoTextField(
+                                        controller: _salaryController,
+                                        keyboardType: TextInputType.text,
+                                        prefix:
+                                            Padding(padding: EdgeInsets.all(.8)),
+                                        decoration: BoxDecoration(),
+                                        style:
+                                            TextStyle(color: Color(0xff262626)),
+                                      )),
+                                )
+                              ],
+                            ),
+                          ),
+                          // Salary Method
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Salary Method',
+                                  style: TextStyle(
+                                    color: Color(0xff262626),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(6)),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Color.fromRGBO(0, 0, 0, 0.25),
+                                            offset: Offset(2, 2),
+                                            blurRadius: 4)
+                                      ],
+                                      border: Border.all(
+                                        color: Color(0xffD9D9D9),
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.only(right: 13, left: 13),
+                                      child: DropdownButton(
+                                        hint: Text(
+                                          'Select',
+                                          style: TextStyle(
+                                            fontSize: 17
+                                          ),
+                                        ),
+                                        isExpanded: true,
+                                        iconSize: 30.0,
+                                        underline: SizedBox.shrink(),
+                                        style:
+                                            TextStyle(color: Color(0xff262626)),
+                                        value: _salarymethodController,
+                                        items: ['Per Jam', 'Per Hari', 'Per Bulan'].map((val) {
+                                          return DropdownMenuItem<String>(
+                                            value: val,
+                                            child: Text(
+                                              val,
+                                              style: TextStyle(
+                                                color: Color(0xff262626),
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          );
+                                        }).toList(),
+                                        onChanged: (val) {
+                                          setState(() {
+                                            _salarymethodController = val;
+                                          });
+                                        },
+                                      ),
+                                    ))
+                              ],
+                            ),
+                          ),
+                          // Submit
+                          Padding(
+                            padding: EdgeInsets.only(top: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: const EdgeInsets.all(0),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    elevation: 4,
+                                  ),
+                                  onPressed: () {
+                                    print(Employee.list());
+                                  },
+                                  child: Ink(
+                                    decoration: const BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                        colors: [
+                                          Color(0xff3DC2EC),
+                                          Color(0xff4B70F5),
+                                        ],
+                                      ),
+                                      borderRadius: BorderRadius.all(Radius.circular(6)),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color.fromRGBO(0, 0, 0, 0.25),
+                                          offset: Offset(2, 2),
+                                          blurRadius: 4,
+                                        ),
                                       ],
                                     ),
-                                    borderRadius: BorderRadius.all(Radius.circular(6)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color.fromRGBO(0, 0, 0, 0.25),
-                                        offset: Offset(2, 2),
-                                        blurRadius: 4,
-                                      ),
-                                    ],
-                                  ),
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    padding: const EdgeInsets.all(10),
-                                    child: const Text(
-                                      'SUBMIT',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.white,
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      padding: const EdgeInsets.all(10),
+                                      child: const Text(
+                                        'SUBMIT',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    )));
+                          SizedBox(height: 20,)
+                        ],
+                      )),
+                ));
           } else {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               Navigator.pushReplacementNamed(context, '/auth');

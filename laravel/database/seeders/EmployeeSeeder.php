@@ -19,7 +19,8 @@ class EmployeeSeeder extends Seeder
         foreach ($users as $user) {
             Employee::create([
                 'user_id' => $user->id,
-                'salary' => 5000000,
+                'salary_method' => '',
+                'salary' => 5000000.0,
                 'join_date' => now()
             ]);
         }
