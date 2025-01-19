@@ -84,7 +84,7 @@ class User {
         id: json['id'],
         name: json['name'],
         email: json['email'],
-        role: json['roles']['name']);
+        role: json['role']['name']);
   }
 
   Map<String, dynamic> toJson() {
