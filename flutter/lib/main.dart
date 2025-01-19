@@ -3,6 +3,7 @@ import 'package:month_year_picker/month_year_picker.dart';
 import 'package:payday/helper.dart';
 import 'package:payday/pages/attendance/attendance.dart';
 import 'package:payday/pages/employee/employee.dart';
+import 'package:payday/pages/payslip/payslip-list.dart';
 import 'package:payday/pages/salary/salary-list.dart';
 import 'package:payday/pages/salary/salary.dart';
 import 'package:payday/services/auth.dart';
@@ -36,6 +37,9 @@ class MyApp extends StatelessWidget {
 
         // Attendance
         '/attendance': (context) => AttendancePage(),
+
+        // Pay Slip
+        '/payslip/list': (context) => PayslipListPage(),
 
         // Salary
         '/salary': (context) => const SalaryPage(),
