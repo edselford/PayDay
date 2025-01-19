@@ -13,17 +13,11 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with('roles')->latest()->paginate(10);
+        $users = User::with('role')->latest()->paginate(10);
         return new UserResource(true, 'List Users', $users);
     }
 
 
-    /**
-     * store
-     *
-     * @param  mixed $request
-     * @return void
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -41,43 +35,42 @@ class UserController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        //upload image
-        $image = $request->file('image');
-        $image->storeAs('public/users', $image->hashName());
+        if ($request->has('image')) {
+            //upload image
+            $image = $request->file('image');
+            $image->storeAs('public/users', $image->hashName());
 
-        $users = User::create([
-            'image' => $image->hashName(),
-            'name' => $request->name,
-            'age' => $request->age,
-            'gender' => $request->gender,
-            'born_date' => $request->born_date,
-            'role_id' => $request->role_id,
-            'email' => $request->email,
-            'password' => $request->password
-        ]);
+            $users = User::create([
+                'image' => $image->hashName(),
+                'name' => $request->name,
+                'age' => $request->age,
+                'gender' => $request->gender,
+                'born_date' => $request->born_date,
+                'role_id' => $request->role_id,
+                'email' => $request->email,
+                'password' => $request->password
+            ]);
+        } else {
+            $users = User::create([
+                'name' => $request->name,
+                'age' => $request->age,
+                'gender' => $request->gender,
+                'born_date' => $request->born_date,
+                'role_id' => $request->role_id,
+                'email' => $request->email,
+                'password' => $request->password
+            ]);
+        }
 
         return new UserResource(true, "Success add user", $users);
     }
 
-    /**
-     * show
-     *
-     * @param  mixed $id
-     * @return void
-     */
     public function show($id)
     {
         $user = User::find($id);
         return new UserResource(true, "Detail user", $user);
     }
 
-    /**
-     * update
-     *
-     * @param  mixed $request
-     * @param  mixed $id
-     * @return void
-     */
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -128,12 +121,6 @@ class UserController extends Controller
         return new UserResource(true, 'Success update user', $user);
     }
 
-    /**
-     * destroy
-     *
-     * @param  mixed $id
-     * @return void
-     */
     public function destroy($id)
     {
         $user = User::find($id);

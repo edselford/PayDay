@@ -64,7 +64,7 @@ class User extends Authenticatable
     }
 
 
-    public function roles()
+    public function role()
     {
         return $this->belongsTo(Roles::class, 'role_id');
     }
@@ -76,6 +76,6 @@ class User extends Authenticatable
 
     function employee()
     {
-        return $this->hasOne(Employee::class, 'user_id');
+        return $this->hasOne(Employee::class);
     }
 }
