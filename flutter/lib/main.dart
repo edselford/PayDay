@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:month_year_picker/month_year_picker.dart';
 import 'package:payday/helper.dart';
 import 'package:payday/pages/employee/employee.dart';
+import 'package:payday/pages/salary/salary-list.dart';
+import 'package:payday/pages/salary/salary.dart';
 import 'package:payday/services/auth.dart';
 import 'pages/login.dart';
 import 'pages/home.dart';
@@ -18,6 +21,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'PayDay',
+      localizationsDelegates: const [
+        MonthYearPickerLocalizations.delegate,
+      ],
       debugShowCheckedModeBanner: false,
       initialRoute: TOKEN == null ? '/auth' : '/home',
       routes: {
@@ -25,7 +31,11 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomePage(),
         
         // Employee
-        '/employee': (context) => const EmployeePage()
+        '/employee': (context) => const EmployeePage(),
+
+        // Salary
+        '/salary': (context) => const SalaryPage(),
+        '/salary/list': (context) => const SalaryListPage()
       },
     );
   }
