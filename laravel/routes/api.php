@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AttendanceController as ApiAttendanceController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
@@ -47,3 +48,6 @@ Route::prefix('attendance')
 
 // Users
 Route::apiResource('/users', UserController::class);
+
+// Attendance
+Route::apiResource('/attendances', ApiAttendanceController::class);
