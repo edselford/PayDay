@@ -79,11 +79,7 @@ class SalaryListPageState extends State<SalaryListPage> {
                 ),
                 leading: IconButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ),
-                    );
+                    Navigator.of(context).pushNamed('/home');
                   },
                   icon: Padding(
                     padding: EdgeInsets.all(0),

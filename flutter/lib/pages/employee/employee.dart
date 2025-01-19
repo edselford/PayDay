@@ -74,11 +74,7 @@ class EmployeePageState extends State<EmployeePage> {
                   ),
                   leading: IconButton(
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
-                        ),
-                      );
+                      Navigator.of(context).pop();
                     },
                     icon: Padding(
                       padding: EdgeInsets.all(0),
