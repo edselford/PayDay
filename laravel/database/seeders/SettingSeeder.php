@@ -15,16 +15,9 @@ class SettingSeeder extends Seeder
     {
         Setting::insert([
             [
-                'key_name' => 'jam_masuk',
-                'value' => '08:00:00',
-                'description' => 'Jam masuk standar kantor',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'key_name' => 'jam_keluar',
-                'value' => '17:00:00',
-                'description' => 'Jam keluar standar kantor',
+                'key_name' => 'jam_kerja_per_hari',
+                'value' => '6',
+                'description' => 'Jumlah jam kerja per hari',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

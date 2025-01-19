@@ -11,29 +11,43 @@ class Auth {
     TOKEN = await storage.read(key: 'token');
   }
 
+  static void unauthorized(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Session Expired')),
+    );
+    logout(context);
+  }
+
   static void logout(BuildContext context) async {
     TOKEN = null;
     await storage.delete(key: 'token');
-    if (context.mounted) Navigator.popAndPushNamed(context, '/auth');
+    if (context.mounted) {
+      Navigator.pushNamedAndRemoveUntil(context, '/auth', (route) => false);
+    }
   }
 
   static void login(BuildContext context, String email, String password) async {
-    var res = await http.post(
+    var res = await http
+        .post(
       Uri.parse("$BASE_URL/login"),
       headers: {"Content-Type": "application/json"},
       body: jsonEncode({'email': email, 'password': password}),
-    );
+    )
+        .catchError((error) {
+      return http.Response(error.toString(), 500);
+    });
 
+    if (!context.mounted) throw Exception("Context not mounted");
     if (res.statusCode >= 200 && res.statusCode < 300) {
       TOKEN = jsonDecode(res.body);
       storage.write(key: 'token', value: TOKEN);
-      if (context.mounted) Navigator.popAndPushNamed(context, '/home');
+      Navigator.popAndPushNamed(context, '/home');
+    } else if (res.statusCode == 401) {
+      unauthorized(context);
     } else {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Login failed: ${res.body}')),
-        );
-      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Login failed: ${res.body}')),
+      );
     }
   }
 
@@ -41,7 +55,9 @@ class Auth {
     var res = await http.get(
       Uri.parse("$BASE_URL/me"),
       headers: {"Authorization": "Bearer $TOKEN"},
-    );
+    ).catchError((error) {
+      return http.Response(error.toString(), 500);
+    });
 
     if (res.statusCode >= 200 && res.statusCode < 300) {
       return User.fromJson(jsonDecode(res.body));
@@ -57,28 +73,21 @@ class User {
   final String email;
   final String role;
 
-  User({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.role
-  });
+  User(
+      {required this.id,
+      required this.name,
+      required this.email,
+      required this.role});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: json['id'],
-      name: json['name'],
-      email: json['email'],
-      role: json['roles']['name']
-    );
+        id: json['id'],
+        name: json['name'],
+        email: json['email'],
+        role: json['roles']['name']);
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'email': email,
-      'role': role
-    };
+    return {'id': id, 'name': name, 'email': email, 'role': role};
   }
 }

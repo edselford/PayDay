@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -8,18 +9,16 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   Future<User?> validateUser(BuildContext context) async {
-    try {
-      return await Auth.me();
-    } catch (e) {
+    return await Auth.me().catchError((error) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Failed to validate user.'),
           ),
         );
+        return null;
       }
-      return null;
-    }
+    });
   }
 
   void logout(BuildContext context) {
@@ -215,45 +214,52 @@ class HomePage extends StatelessWidget {
                               child: SizedBox(
                                 width: double.infinity,
                                 height: 103,
-                                child: DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8)),
-                                    gradient: LinearGradient(
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                        colors: [
-                                          Color(0xff3DC2EC),
-                                          Color(0xff4B70F5),
-                                        ]),
-                                  ),
-                                  child: Stack(children: [
-                                    Padding(
-                                      padding: EdgeInsets.all(20),
-                                      child: Center(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.calendar_month_outlined,
-                                              size: 75,
-                                              color: Colors.white,
-                                            ),
-                                            Text(
-                                              'Attendance',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 24,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                          ],
+                                child: RawMaterialButton(
+                                  onPressed: () {
+                                    Navigator.of(context)
+                                        .pushNamed('/attendance');
+                                  },
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8)),
+                                      gradient: LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: [
+                                            Color(0xff3DC2EC),
+                                            Color(0xff4B70F5),
+                                          ]),
+                                    ),
+                                    child: Stack(children: [
+                                      Padding(
+                                        padding: EdgeInsets.all(20),
+                                        child: Center(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                Icons.calendar_month_outlined,
+                                                size: 75,
+                                                color: Colors.white,
+                                              ),
+                                              Text(
+                                                'Attendance',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 24,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ]),
+                                    ]),
+                                  ),
                                 ),
                               ),
                             ),

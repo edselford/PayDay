@@ -12,14 +12,22 @@ class Employee extends Model
     protected $fillable = [
         'user_id',
         'salary',
+        'salary_method',
         'join_date'
     ];
 
-    function attendances() {
+    function attendances()
+    {
         return $this->hasMany(Attendance::class, 'employee_id');
     }
 
-    function todayAttendance() {
+    function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    function todayAttendance()
+    {
         return $this->attendances()->whereDate('date', now()->toDateString())->first();
     }
 }
