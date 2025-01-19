@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:payday/helper.dart';
+import 'package:payday/pages/employee/employee.dart';
 import 'package:payday/services/auth.dart';
 import 'pages/login.dart';
 import 'pages/home.dart';
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/auth': (context) => const LoginPage(),
         '/home': (context) => const HomePage(),
+        
+        // Employee
+        '/employee': (context) => const EmployeePage()
       },
     );
   }
