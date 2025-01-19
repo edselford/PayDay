@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
             $table->float("salary");
-            $table->string("salary_method");
+            $table->string("salary_method")->nullable();
             $table->date("join_date");
             $table->timestamps();
         });
