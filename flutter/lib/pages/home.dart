@@ -162,45 +162,51 @@ class HomePage extends StatelessWidget {
                               child: SizedBox(
                                 width: double.infinity,
                                 height: 103,
-                                child: DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8)),
-                                    gradient: LinearGradient(
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                        colors: [
-                                          Color(0xff3DC2EC),
-                                          Color(0xff4B70F5),
-                                        ]),
-                                  ),
-                                  child: Stack(children: [
-                                    Padding(
-                                      padding: EdgeInsets.all(20),
-                                      child: Center(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.receipt_long_outlined,
-                                              size: 75,
-                                              color: Colors.white,
-                                            ),
-                                            Text(
-                                              'Pay Slip',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 24,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                          ],
+                                child: RawMaterialButton(
+                                  onPressed: () {
+                                    Navigator.of(context)
+                                        .pushNamed('/payslip/list');
+                                  },
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8)),
+                                      gradient: LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: [
+                                            Color(0xff3DC2EC),
+                                            Color(0xff4B70F5),
+                                          ]),
+                                    ),
+                                    child: Stack(children: [
+                                      Padding(
+                                        padding: EdgeInsets.all(20),
+                                        child: Center(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                Icons.receipt_long_outlined,
+                                                size: 75,
+                                                color: Colors.white,
+                                              ),
+                                              Text(
+                                                'Pay Slip',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 24,
+                                                    fontWeight: FontWeight.w500),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ]),
+                                    ]),
+                                  ),
                                 ),
                               ),
                             ),
@@ -268,11 +274,11 @@ class HomePage extends StatelessWidget {
                       ],
                     )),
                 Padding(
-                  padding: EdgeInsets.only(top: 40),
+                  padding: EdgeInsets.only(right: 20, left: 20, top: 40),
                   child: Column(
                     children: [
-                      ElevatedButton(
-                          onPressed: () {
+                      InkWell(
+                          onTap: () {
                             Navigator.of(context).pushNamed('/employee');
                           },
                           child: SizedBox(
@@ -329,6 +335,80 @@ class HomePage extends StatelessWidget {
                                   ),
                                   Text(
                                     'Employee',
+                                    style: TextStyle(
+                                      color: Color(0xff262626),
+                                      fontSize: 20,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 20, left: 20, top: 20),
+                  child: Column(
+                    children: [
+                      InkWell(
+                          onTap: () {
+                            Navigator.of(context).pushNamed('/salary/list');
+                          },
+                          child: SizedBox(
+                            width: double.infinity,
+                            height: 72,
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12)),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Color.fromRGBO(0, 0, 0, 0.25),
+                                      offset: Offset(2, 2),
+                                      blurRadius: 4)
+                                ],
+                                border: Border.all(
+                                  color: Color(0xffD9D9D9),
+                                  width: 1,
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 15),
+                                    child: SizedBox(
+                                      width: 14,
+                                      height: 72,
+                                      child: DecoratedBox(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(7),
+                                            bottomLeft: Radius.circular(7),
+                                          ),
+                                          gradient: LinearGradient(
+                                              begin: Alignment.topCenter,
+                                              end: Alignment.bottomCenter,
+                                              colors: [
+                                                Color(0xff3DC2EC),
+                                                Color(0xff4B70F5),
+                                              ]),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 15),
+                                    child: Icon(
+                                      Icons.attach_money_rounded,
+                                      size: 35,
+                                      color: Color(0xff262626),
+                                    ),
+                                  ),
+                                  Text(
+                                    'Salary',
                                     style: TextStyle(
                                       color: Color(0xff262626),
                                       fontSize: 20,
