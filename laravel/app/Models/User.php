@@ -74,8 +74,8 @@ class User extends Authenticatable
         return $this->hasMany(Salary::class, 'user_id');
     }
 
-    function absences()
+    function employee()
     {
-        return $this->hasMany(Absence::class, 'user_id');
+        return $this->hasOne(Employee::class, 'user_id');
     }
 }
