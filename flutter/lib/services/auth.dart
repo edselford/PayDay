@@ -34,6 +34,7 @@ class Auth {
       body: jsonEncode({'email': email, 'password': password}),
     )
         .catchError((error) {
+          print(error);
       return http.Response(error.toString(), 500);
     });
 
@@ -62,32 +63,53 @@ class Auth {
     if (res.statusCode >= 200 && res.statusCode < 300) {
       return User.fromJson(jsonDecode(res.body));
     } else {
-      throw Exception('Failed to load user data');
+          print(res.body);
+      throw Exception('Failed to load user data, ${res.body}');
     }
   }
 }
+
+enum Gender { m, f }
 
 class User {
   final int id;
   final String name;
   final String email;
   final String role;
+  final String age;
+  final Gender gender;
+  final DateTime bornDate;
 
   User(
       {required this.id,
       required this.name,
       required this.email,
-      required this.role});
+      required this.role,
+      required this.age,
+      required this.gender,
+      required this.bornDate});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
         id: json['id'],
         name: json['name'],
         email: json['email'],
-        role: json['role']['name']);
+        role: json['role']['name'],
+        age: json['age'],
+        gender: Gender.values
+            .firstWhere((e) => e.toString() == 'Gender.' + json['gender']),
+        bornDate: DateTime.parse(json['born_date']));
   }
 
   Map<String, dynamic> toJson() {
-    return {'id': id, 'name': name, 'email': email, 'role': role};
+    return {
+      'id': id,
+      'name': name,
+      'email': email,
+      'role': role,
+      'age': age,
+      'gender': gender.toString().split('.').last,
+      'bornDate': bornDate.toIso8601String(),
+    };
   }
 }

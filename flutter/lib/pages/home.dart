@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:payday/helper.dart';
 import 'package:payday/services/auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -9,13 +10,10 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   Future<User?> validateUser(BuildContext context) async {
-    return await Auth.me().catchError((error) {
+    return await Auth.me()
+    .catchError((error) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Failed to validate user.'),
-          ),
-        );
+        alert(context, error.toString());
         return null;
       }
     });
@@ -51,27 +49,28 @@ class HomePage extends StatelessWidget {
           );
         } else if (snapshot.hasData && snapshot.data != null) {
           return Scaffold(
-              appBar: AppBar(
-                leading: IconButton(
-                  onPressed: () => {Auth.logout(context)},
-                  icon: Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Icon(
+                appBar: AppBar(
+                leading: Padding(
+                  padding: const EdgeInsets.only(left: 10.0, top: 10),
+                  child: IconButton(
+                    onPressed: () => {Auth.logout(context)},
+                    icon: Icon(
                       Icons.logout,
                       size: 30,
                     ),
                   ),
                 ),
                 actions: [
-                  IconButton(
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10.0, top: 10),
+                    child: IconButton(
                       onPressed: () => logout(context),
-                      icon: Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Icon(
-                          Icons.settings_outlined,
-                          size: 30,
-                        ),
-                      ))
+                      icon: Icon(
+                        Icons.settings_outlined,
+                        size: 30,
+                      ),
+                    ),
+                  )
                 ],
               ),
               body: Column(children: [
@@ -80,73 +79,78 @@ class HomePage extends StatelessWidget {
                     child: SizedBox(
                       width: double.infinity,
                       height: 103,
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
-                          gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Color(0xff3DC2EC),
-                                Color(0xff4B70F5),
-                                Color(0xff4C3BCF)
-                              ]),
-                        ),
-                        child: Stack(children: [
-                          Padding(
-                            padding: EdgeInsets.all(20),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  snapshot.data!.name,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Text(
-                                  snapshot.data!.role,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.normal),
-                                )
-                              ],
-                            ),
+                      child: RawMaterialButton(
+                        onPressed: () {
+                          Navigator.of(context).pushNamed("/profile");
+                        },
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                            gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color(0xff3DC2EC),
+                                  Color(0xff4B70F5),
+                                  Color(0xff4C3BCF)
+                                ]),
                           ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Padding(
-                              padding: EdgeInsets.only(right: 20),
-                              child: Container(
-                                  width: 64,
-                                  height: 64,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(118),
-                                      topRight: Radius.circular(118),
-                                      bottomLeft: Radius.circular(118),
-                                      bottomRight: Radius.circular(118),
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Color.fromRGBO(0, 0, 0, 0.25),
-                                          offset: Offset(0, 4),
-                                          blurRadius: 4)
-                                    ],
-                                    border: Border.all(
-                                      color: Color.fromRGBO(255, 255, 255, 1),
-                                      width: 2,
-                                    ),
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/Untitleddesign51.png'),
-                                        fit: BoxFit.fitWidth),
-                                  )),
+                          child: Stack(children: [
+                            Padding(
+                              padding: EdgeInsets.all(20),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    snapshot.data!.name,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  Text(
+                                    snapshot.data!.role,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.normal),
+                                  )
+                                ],
+                              ),
                             ),
-                          )
-                        ]),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Padding(
+                                padding: EdgeInsets.only(right: 20),
+                                child: Container(
+                                    width: 64,
+                                    height: 64,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(118),
+                                        topRight: Radius.circular(118),
+                                        bottomLeft: Radius.circular(118),
+                                        bottomRight: Radius.circular(118),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Color.fromRGBO(0, 0, 0, 0.25),
+                                            offset: Offset(0, 4),
+                                            blurRadius: 4)
+                                      ],
+                                      border: Border.all(
+                                        color: Color.fromRGBO(255, 255, 255, 1),
+                                        width: 2,
+                                      ),
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'assets/images/Untitleddesign51.png'),
+                                          fit: BoxFit.fitWidth),
+                                    )),
+                              ),
+                            )
+                          ]),
+                        ),
                       ),
                     )),
                 Padding(
@@ -199,7 +203,8 @@ class HomePage extends StatelessWidget {
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 24,
-                                                    fontWeight: FontWeight.w500),
+                                                    fontWeight:
+                                                        FontWeight.w500),
                                               ),
                                             ],
                                           ),

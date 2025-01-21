@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:payday/helper.dart';
 import 'package:payday/services/auth.dart';
 
 class PayslipListPage extends StatefulWidget {
@@ -25,13 +26,7 @@ class PayslipListPageState extends State<PayslipListPage> {
     try {
       return await Auth.me();
     } catch (e) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Failed to validate user.'),
-          ),
-        );
-      }
+      if (context.mounted) alert(context, "Failed to validate user");
       return null;
     }
   }

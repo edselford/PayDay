@@ -14,9 +14,9 @@ class RoleHandler
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, string $role): Response
+    public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        if (Auth::user()->roles->name != $role) {
+        if (!in_array(Auth::user()->role->name, $roles)) {
             return response("Forbidden", 403);  
         }
         return $next($request);

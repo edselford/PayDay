@@ -29,7 +29,7 @@ Route::get('/me', [AuthController::class, "me"])->middleware('auth:sanctum');
 
 Route::prefix('attendance')
     ->controller(AttendanceController::class)
-    ->middleware(['auth:sanctum', 'role:User'])
+    ->middleware(['auth:sanctum'])
     ->group(function () {
         Route::post('check', 'check');
         Route::get('status', 'today_status');

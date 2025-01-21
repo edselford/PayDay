@@ -4,6 +4,8 @@ import 'package:payday/helper.dart';
 import 'package:payday/pages/attendance/attendance.dart';
 import 'package:payday/pages/employee/employee.dart';
 import 'package:payday/pages/payslip/payslip-list.dart';
+import 'package:payday/pages/profile/edit_profile.dart';
+import 'package:payday/pages/profile/profile.dart';
 import 'package:payday/pages/salary/salary-list.dart';
 import 'package:payday/pages/salary/salary.dart';
 import 'package:payday/services/auth.dart';
@@ -43,7 +45,11 @@ class MyApp extends StatelessWidget {
 
         // Salary
         '/salary': (context) => const SalaryPage(),
-        '/salary/list': (context) => const SalaryListPage()
+        '/salary/list': (context) => const SalaryListPage(),
+
+        // Profile
+        '/profile': (context) => ProfilePage(),
+        '/profile/edit': (context) => EditProfilePage()
       },
     );
   }
