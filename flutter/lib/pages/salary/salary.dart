@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
@@ -6,6 +7,8 @@ import 'package:month_year_picker/month_year_picker.dart';
 import 'package:payday/helper.dart';
 import 'package:payday/pages/home.dart';
 import 'package:payday/services/auth.dart';
+import 'package:payday/services/employee.dart';
+import 'package:payday/services/salary.dart';
 
 class SalaryPage extends StatefulWidget {
   const SalaryPage({super.key});
@@ -21,7 +24,8 @@ class SalaryPageState extends State<SalaryPage> {
   final TextEditingController _overtimeController = TextEditingController();
   final TextEditingController _deductionsController = TextEditingController();
   final TextEditingController _totalController = TextEditingController();
-  String? _genderController;
+  List<Map<String, dynamic>> employeeData = [];
+  String? _employeeController;
   String? _salarymethodController;
   late Future<User?> _validateUserFuture;
 
@@ -60,6 +64,25 @@ class SalaryPageState extends State<SalaryPage> {
     }
   }
 
+  Future getEmployee(BuildContext context) async {
+    try {
+      return await Employee.list();
+    } catch (e) {
+      if (context.mounted) alert(context, "Failed to validate user");
+      return null;
+    }
+  }
+
+  Future<void> generateEmployee() async {
+    var emp_list = await getEmployee(context);
+
+    List<dynamic> jsonData = jsonDecode(emp_list);
+
+    setState(() {
+      employeeData = List<Map<String, dynamic>>.from(jsonData);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -69,6 +92,9 @@ class SalaryPageState extends State<SalaryPage> {
     _overtimeController.text = '0';
     _deductionsController.text = '0';
     _totalController.text = '0';
+
+    // Employee List
+    generateEmployee();
   }
 
   void _updateTotalValue() {
@@ -86,6 +112,24 @@ class SalaryPageState extends State<SalaryPage> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)?.settings.arguments;
+
+    // Map<String, dynamic> data = args != null && args is Map<String, dynamic>
+    //     ? Map<String, dynamic>.from(args)
+    //     : {};
+    if (args != null && args is Map<String, dynamic>) {
+      Map<String, dynamic> data = Map<String, dynamic>.from(args);
+      print(data);
+      setState(() {
+        _employeeController = data['employee']['user']['name'];
+        _periodController.text = data['period'];
+        _salaryController.text = data['basic_salary'].toString();
+        _allowancesController.text = data['allowances'].toString();
+        _overtimeController.text = data['overtime'].toString();
+        _deductionsController.text = data['deductions'].toString();
+        _totalController.text = data['total_salary'].toString();
+      });
+    }
     return FutureBuilder(
         future: _validateUserFuture,
         builder: (context, snapshot) {
@@ -104,7 +148,7 @@ class SalaryPageState extends State<SalaryPage> {
                   ),
                   leading: IconButton(
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pushNamed('/salary/list');
                     },
                     icon: Padding(
                       padding: EdgeInsets.all(0),
@@ -182,13 +226,12 @@ class SalaryPageState extends State<SalaryPage> {
                                         underline: SizedBox.shrink(),
                                         style:
                                             TextStyle(color: Color(0xff262626)),
-                                        value: _genderController,
-                                        items:
-                                            ['Edsel', 'Iqbal', 'Atha', 'etc'].map((val) {
+                                        value: _employeeController,
+                                        items: employeeData.map((e) {
                                           return DropdownMenuItem<String>(
-                                            value: val,
+                                            value: e['text'],
                                             child: Text(
-                                              val,
+                                              e['text'],
                                               style: TextStyle(
                                                 color: Color(0xff262626),
                                                 fontSize: 17,
@@ -197,9 +240,20 @@ class SalaryPageState extends State<SalaryPage> {
                                             ),
                                           );
                                         }).toList(),
-                                        onChanged: (val) {
+                                        onChanged: (String? value) {
                                           setState(() {
-                                            _genderController = val;
+                                            _employeeController = value;
+
+                                            final employee =
+                                                employeeData.firstWhere(
+                                              (e) => e['text'] == value,
+                                              orElse: () => {"salary": 0},
+                                            );
+
+                                            _salaryController.text =
+                                                employee['salary'].toString();
+
+                                            _updateTotalValue();
                                           });
                                         },
                                       ),
@@ -515,7 +569,27 @@ class SalaryPageState extends State<SalaryPage> {
                                     ),
                                     elevation: 4,
                                   ),
-                                  onPressed: null,
+                                  onPressed: () {
+                                    if (_employeeController == null ||
+                                        _employeeController == '') {
+                                      alert(context, "Employee Required!");
+                                    } else if (_periodController.text == '') {
+                                      alert(context, "Period Required!");
+                                    } else {
+                                      Map<String, String?> data = {
+                                        'employee': _employeeController,
+                                        'period': _periodController.text,
+                                        'salary': _salaryController.text,
+                                        'allowances':
+                                            _allowancesController.text,
+                                        'overtime': _overtimeController.text,
+                                        'deductions':
+                                            _deductionsController.text,
+                                        'total': _totalController.text,
+                                      };
+                                      Salary.store(context, data);
+                                    }
+                                  },
                                   child: Ink(
                                     decoration: const BoxDecoration(
                                       gradient: LinearGradient(
