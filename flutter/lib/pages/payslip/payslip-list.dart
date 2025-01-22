@@ -39,35 +39,38 @@ class PayslipListPageState extends State<PayslipListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: _validateUserFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          } else if (snapshot.hasData && snapshot.data != null) {
+    // return FutureBuilder(
+    //     future: _validateUserFuture,
+    //     builder: (context, snapshot) {
+    //       if (snapshot.connectionState == ConnectionState.waiting) {
+    //         return const Scaffold(
+    //           body: Center(
+    //             child: CircularProgressIndicator(),
+    //           ),
+    //         );
+    //       } else if (snapshot.hasData && snapshot.data != null) {
             return Scaffold(
               appBar: AppBar(
                 title: const Text(
                   'Pay Slip',
                   style: TextStyle(color: Colors.white),
                 ),
-                leading: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/home');
-                  },
-                  icon: Padding(
-                    padding: EdgeInsets.all(0),
-                    child: Icon(
-                      Icons.arrow_back,
-                      size: 30,
-                      color: Colors.white,
-                    ),
-                  ),
+                iconTheme: IconThemeData(
+                  color: Colors.white
                 ),
+                // leading: IconButton(
+                //   onPressed: () {
+                //     Navigator.of(context).pushNamed('/home');
+                //   },
+                //   icon: Padding(
+                //     padding: EdgeInsets.all(0),
+                //     child: Icon(
+                //       Icons.arrow_back,
+                //       size: 30,
+                //       color: Colors.white,
+                //     ),
+                //   ),
+                // ),
                 backgroundColor: Colors.transparent,
                 // elevation: 0,
                 flexibleSpace: Container(
@@ -176,16 +179,16 @@ class PayslipListPageState extends State<PayslipListPage> {
                     )),
               ),
             );
-          } else {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              Navigator.pushReplacementNamed(context, '/auth');
-            });
-            return const Scaffold(
-              body: Center(
-                child: Text('Redirecting...'),
-              ),
-            );
-          }
-        });
+          // } else {
+          //   WidgetsBinding.instance.addPostFrameCallback((_) {
+          //     Navigator.pushReplacementNamed(context, '/auth');
+          //   });
+          //   return const Scaffold(
+          //     body: Center(
+          //       child: Text('Redirecting...'),
+          //     ),
+          //   );
+          // }
+        // });
   }
 }
