@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\SalaryController;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -35,17 +36,28 @@ Route::prefix('attendance')
         Route::get('status', 'today_status');
     });
 
-// Karyawan
-// Route::prefix('employee')
-//     ->controller(EmployeeController::class)
-//     ->middleware(['auth:sanctum', 'role:manager'])
-//     ->group(
-//         function () {
-//             Route::get('list', 'list');
-//             Route::put('change_role/{id}', 'change_role');
-//             Route::get('absence_today', 'absence_today');
-//         }
-//     );
+// Employee
+Route::prefix('employee')
+    ->controller(EmployeeController::class)
+    ->middleware(['auth:sanctum', 'role:manager,admin'])
+    ->group(
+        function () {
+            Route::get('list', 'list');
+            // Route::put('change_role/{id}', 'change_role');
+            // Route::get('absence_today', 'absence_today');
+        }
+    );
+
+// Salary
+Route::prefix('salary')
+    ->controller(SalaryController::class)
+    ->middleware(['auth:sanctum'])
+    ->group(
+        function () {
+            Route::get('list', 'list');
+            Route::post('store', 'store');
+        }
+    );
 
 // Users
 Route::apiResource('/users', UserController::class);
