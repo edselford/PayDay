@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absence;
+use App\Models\Employee;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -11,11 +12,15 @@ use Illuminate\Support\Facades\Validator;
 
 class EmployeeController extends Controller
 {
-    // public function list(Request $request)
-    // {
-    //     $users = User::where('role', 'user')->get();
-    //     return response()->json($users);
-    // }
+    public function list(Request $request)
+    {
+        $users = Employee::with('user')->get();
+        $list = [];
+        foreach ($users as $item) {
+            $list[] = ['text' => $item->user->name, 'salary' => $item->salary];
+        }
+        return response()->json($list);
+    }
 
     // public function absence_today(Request $request)
     // {
