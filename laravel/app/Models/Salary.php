@@ -9,9 +9,20 @@ class Salary extends Model
 {
     use HasFactory;
 
+    protected $table = 'salary';
+
     protected $fillable = [
-        'user_id',
-        'amount',
-        'date'
+        'employee_id',
+        'period',
+        'basic_salary',
+        'allowances',
+        'overtime',
+        'deductions',
+        'total_salary'
     ];
+
+    function employee()
+    {
+        return $this->belongsTo(Employee::class, 'employee_id');
+    }
 }
