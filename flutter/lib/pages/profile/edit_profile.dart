@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:payday/helper.dart';
 import 'package:payday/services/auth.dart';
+import 'package:payday/services/profile.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override
@@ -54,6 +55,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               height: 20,
             ),
             TextField(
+              enabled: false,
               controller: _emailController,
               decoration: InputDecoration(
                   labelText: 'Email', border: OutlineInputBorder()),
@@ -103,6 +105,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
             SizedBox(height: 20),
             RawMaterialButton(
               onPressed: () {
+                if (_selectedGender == null) return;
+                ProfileService.changeProfile(_nameController.text,
+                    _selectedGender!, _birthDateController.text, () {
+                      alert(context, "Profile saved sucessfully");
+                      Navigator.of(context).pushNamedAndRemoveUntil("/home", (_) => false);
+                    }).catchError((error) {
+                      if (context.mounted) alert(context, error);
+                    });
               },
               child: Ink(
                 decoration: const BoxDecoration(

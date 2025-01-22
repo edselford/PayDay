@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -35,6 +36,8 @@ Route::prefix('attendance')
         Route::post('check', 'check');
         Route::get('status', 'today_status');
     });
+
+Route::post("edit_profile", [ProfileController::class, "edit_profile"])->middleware('auth:sanctum');
 
 // Employee
 Route::prefix('employee')
