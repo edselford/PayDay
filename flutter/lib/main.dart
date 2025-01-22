@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData.from(colorScheme: ColorScheme.fromSeed(seedColor: Color(0xff3DC2EC))),
       title: 'PayDay',
       localizationsDelegates: const [
         MonthYearPickerLocalizations.delegate,

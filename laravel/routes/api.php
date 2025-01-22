@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,6 +35,8 @@ Route::prefix('attendance')
         Route::post('check', 'check');
         Route::get('status', 'today_status');
     });
+
+Route::post("edit_profile", [ProfileController::class, "edit_profile"])->middleware('auth:sanctum');
 
 // Karyawan
 // Route::prefix('employee')
