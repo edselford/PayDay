@@ -16,7 +16,7 @@ class RoleHandler
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        if (!in_array(Auth::user()->role->name, $roles)) {
+        if (!in_array(strtolower(Auth::user()->role->name), $roles)) {
             return response("Forbidden", 403);  
         }
         return $next($request);
