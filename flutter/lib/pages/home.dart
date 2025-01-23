@@ -202,7 +202,7 @@ class HomePage extends StatelessWidget {
                                                 'Pay Slip',
                                                 style: TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: 24,
+                                                    fontSize: 18,
                                                     fontWeight:
                                                         FontWeight.w500),
                                               ),
@@ -261,7 +261,7 @@ class HomePage extends StatelessWidget {
                                                 'Attendance',
                                                 style: TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: 24,
+                                                    fontSize: 18,
                                                     fontWeight:
                                                         FontWeight.w500),
                                               ),
