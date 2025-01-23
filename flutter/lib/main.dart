@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 import 'package:payday/helper.dart';
 import 'package:payday/pages/attendance/attendance.dart';
@@ -20,11 +21,13 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.from(colorScheme: ColorScheme.fromSeed(seedColor: Color(0xff3DC2EC))),
+      theme: ThemeData.from(
+              colorScheme: ColorScheme.light())
+          .copyWith(textTheme: GoogleFonts.interTextTheme()),
       title: 'PayDay',
       localizationsDelegates: const [
         MonthYearPickerLocalizations.delegate,
@@ -34,7 +37,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/auth': (context) => const LoginPage(),
         '/home': (context) => const HomePage(),
-        
+
         // Employee
         '/employee': (context) => const EmployeePage(),
 
