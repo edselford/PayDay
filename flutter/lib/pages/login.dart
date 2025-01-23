@@ -28,7 +28,9 @@ class LoginPageState extends State<LoginPage> {
       alert(context, "Username & password can't be empty");
       return;
     }
-    Auth.login(context, _emailController.text, _passwordController.text);
+    Auth.login(context, _emailController.text, _passwordController.text).catchError((err) {
+      alert(context, err);
+    });
   }
 
   // @override

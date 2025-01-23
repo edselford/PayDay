@@ -26,7 +26,7 @@ class Auth {
     }
   }
 
-  static void login(BuildContext context, String email, String password) async {
+  static Future<void> login(BuildContext context, String email, String password) async {
     var res = await http
         .post(
       Uri.parse("$BASE_URL/login"),
