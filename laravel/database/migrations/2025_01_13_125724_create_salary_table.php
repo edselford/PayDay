@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('employee_id')->constrained('employees')->onDelete('cascade');
             $table->date('period');
-            $table->float('basic_salary')->nullable();
-            $table->float('allowances')->nullable();
-            $table->float('overtime')->nullable();
-            $table->float('deductions')->nullable();
-            $table->float('total_salary')->nullable();
+            $table->double('basic_salary')->nullable();
+            $table->double('allowances')->nullable();
+            $table->double('overtime')->nullable();
+            $table->double('deductions')->nullable();
+            $table->double('total_salary')->nullable();
             $table->timestamps();
         });
     }
