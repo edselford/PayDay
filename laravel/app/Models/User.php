@@ -69,11 +69,6 @@ class User extends Authenticatable
         return $this->belongsTo(Roles::class, 'role_id');
     }
 
-    function salaries()
-    {
-        return $this->hasMany(Salary::class, 'user_id');
-    }
-
     function employee()
     {
         return $this->hasOne(Employee::class);

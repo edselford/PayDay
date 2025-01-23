@@ -278,7 +278,7 @@ class HomePage extends StatelessWidget {
                         ),
                       ],
                     )),
-                Padding(
+                snapshot.data?.role == "User" ? SizedBox() : Padding(
                   padding: EdgeInsets.only(right: 20, left: 20, top: 40),
                   child: Column(
                     children: [
@@ -352,7 +352,7 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                Padding(
+                snapshot.data?.role == "User" ? SizedBox() : Padding(
                   padding: EdgeInsets.only(right: 20, left: 20, top: 20),
                   child: Column(
                     children: [

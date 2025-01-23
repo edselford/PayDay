@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:payday/components/custom-textfield.dart';
+import 'package:payday/helper.dart';
 import 'package:payday/services/auth.dart';
 
 class LoginPage extends StatefulWidget {
@@ -23,6 +24,10 @@ class LoginPageState extends State<LoginPage> {
   }
 
   void onLogin() {
+    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+      alert(context, "Username & password can't be empty");
+      return;
+    }
     Auth.login(context, _emailController.text, _passwordController.text);
   }
 
@@ -184,6 +189,7 @@ class LoginPageState extends State<LoginPage> {
               RawMaterialButton(
                 onPressed: onLogin,
                 child: Ink(
+                  width: 346,
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,

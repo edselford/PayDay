@@ -26,8 +26,13 @@ class Employee extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    function salaries() {
+        return $this->hasMany(Salary::class, "employee_id");
+    }
+
     function todayAttendance()
     {
         return $this->attendances()->whereDate('date', now()->toDateString())->first();
     }
+
 }

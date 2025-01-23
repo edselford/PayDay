@@ -7,6 +7,7 @@ use App\Models\Employee;
 use App\Models\Salary;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class SalaryController extends Controller
@@ -76,5 +77,10 @@ class SalaryController extends Controller
         }
 
         return null;
+    }
+
+    function own_salary() {
+        $salaries = Auth::user()->employee->salaries;
+        return response()->json($salaries);
     }
 }

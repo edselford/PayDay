@@ -59,6 +59,7 @@ Route::prefix('salary')
         function () {
             Route::get('list', 'list');
             Route::post('store', 'store');
+            Route::get('own_salary', 'own_salary');
         }
     );
 

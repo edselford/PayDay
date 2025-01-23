@@ -44,11 +44,9 @@ class Auth {
       storage.write(key: 'token', value: TOKEN);
       Navigator.popAndPushNamed(context, '/home');
     } else if (res.statusCode == 401) {
-      unauthorized(context);
+      alert(context, "Username or Password Incorrect");
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Login failed: ${res.body}')),
-      );
+      alert(context, "Error ${res.body}");
     }
   }
 
